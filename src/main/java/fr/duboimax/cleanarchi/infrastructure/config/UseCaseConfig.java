@@ -10,6 +10,7 @@ import fr.duboimax.cleanarchi.application.use_cases.auth.AuthenticateUser;
 import fr.duboimax.cleanarchi.application.use_cases.auth.CreateUser;
 import fr.duboimax.cleanarchi.application.use_cases.logo.AddCompanyLogo;
 import fr.duboimax.cleanarchi.application.use_cases.logo.GetAllLogos;
+import fr.duboimax.cleanarchi.application.use_cases.tierlist.GetTierList;
 import fr.duboimax.cleanarchi.application.use_cases.tierlist.PlaceLogo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,5 +41,10 @@ public class UseCaseConfig {
     @Bean
     public PlaceLogo placeLogo(TierListRepository tierListRepository, CompanyLogoRepository companyLogoRepository) {
         return new PlaceLogo(tierListRepository, companyLogoRepository);
+    }
+
+    @Bean
+    public GetTierList getTierList(TierListRepository tierListRepository, CompanyLogoRepository companyLogoRepository, LogoUrlBuilder logoUrlBuilder) {
+        return new GetTierList(tierListRepository, companyLogoRepository, logoUrlBuilder);
     }
 }
