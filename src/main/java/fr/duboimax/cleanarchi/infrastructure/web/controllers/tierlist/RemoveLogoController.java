@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -39,7 +40,7 @@ public class RemoveLogoController {
     })
     @DeleteMapping("/remove")
     public ResponseEntity<ApiResponse<RemoveLogoResponse>> remove(
-            @RequestBody RemoveLogoRequest request,
+            @Valid @RequestBody RemoveLogoRequest request,
             @AuthenticationPrincipal String userId
     ) {
         UserId id = new UserId(UUID.fromString(userId));

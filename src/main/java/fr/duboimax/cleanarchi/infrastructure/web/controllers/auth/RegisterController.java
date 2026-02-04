@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +36,7 @@ public class RegisterController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "409", description = "Email déjà existant", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
     })
     @PostMapping("/register")
-    public ResponseEntity<ApiResponse<RegisterUserResponse>> register(@RequestBody RegisterUserRequest request) {
+    public ResponseEntity<ApiResponse<RegisterUserResponse>> register(@Valid  @RequestBody RegisterUserRequest request) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(ApiResponse.success(201, createUser.execute(request)));
