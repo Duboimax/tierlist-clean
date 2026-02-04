@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,7 +35,7 @@ public class AddLogoController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "409", description = "Logo déjà existant", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
     })
     @PostMapping("/logos")
-    public ResponseEntity<ApiResponse<AddCompanyLogoResponse>> addLogo(@RequestBody AddCompanyLogoRequest request) {
+    public ResponseEntity<ApiResponse<AddCompanyLogoResponse>> addLogo(@Valid @RequestBody AddCompanyLogoRequest request) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(ApiResponse.success(201, addCompanyLogo.execute(request)));

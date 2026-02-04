@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.apache.catalina.realm.AuthenticatedUserRealm;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +37,7 @@ public class LoginController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "Identifiants invalides", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
     })
     @PostMapping("/login")
-    public  ResponseEntity<ApiResponse<AuthenticateUserResponse>> login(@RequestBody AuthenticateUserRequest request) {
+    public  ResponseEntity<ApiResponse<AuthenticateUserResponse>> login(@Valid @RequestBody AuthenticateUserRequest request) {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(ApiResponse.success(200, authenticateUser.execute(request)));
