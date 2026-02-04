@@ -25,25 +25,12 @@ public class LogoSeeder {
 
         List<String> companies = List.of(
                 "google.com",
-                "apple.com",
                 "microsoft.com",
                 "amazon.com",
                 "netflix.com",
                 "spotify.com",
-                "twitter.com",
-                "facebook.com",
-                "instagram.com",
-                "linkedin.com",
-                "github.com",
-                "stripe.com",
-                "slack.com",
-                "notion.so",
-                "figma.com",
-                "discord.com",
                 "twitch.tv",
-                "reddit.com",
-                "airbnb.com",
-                "uber.com"
+                "reddit.com"
         );
 
         for (String domain : companies) {
