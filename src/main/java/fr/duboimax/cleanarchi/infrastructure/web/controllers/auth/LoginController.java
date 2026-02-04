@@ -1,9 +1,11 @@
 package fr.duboimax.cleanarchi.infrastructure.web.controllers.auth;
 
 import fr.duboimax.cleanarchi.application.dtos.requests.AuthenticateUserRequest;
+import fr.duboimax.cleanarchi.application.dtos.responses.ApiResponse;
 import fr.duboimax.cleanarchi.application.dtos.responses.AuthenticateUserResponse;
 import fr.duboimax.cleanarchi.application.use_cases.auth.AuthenticateUser;
 import org.apache.catalina.realm.AuthenticatedUserRealm;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,8 +24,9 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthenticateUserResponse> login(@RequestBody AuthenticateUserRequest request) {
-        AuthenticateUserResponse response = authenticateUser.execute(request);
-        return ResponseEntity.ok(response);
+    public  ResponseEntity<ApiResponse<AuthenticateUserResponse>> login(@RequestBody AuthenticateUserRequest request) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(ApiResponse.success(200, authenticateUser.execute(request)));
     }
 }

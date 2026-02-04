@@ -1,7 +1,9 @@
 package fr.duboimax.cleanarchi.infrastructure.web.controllers.logo;
 
+import fr.duboimax.cleanarchi.application.dtos.responses.ApiResponse;
 import fr.duboimax.cleanarchi.application.dtos.responses.GetAllLogosResponse;
 import fr.duboimax.cleanarchi.application.use_cases.logo.GetAllLogos;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +20,9 @@ public class GetAllLogosController {
     }
 
     @GetMapping
-    public ResponseEntity<GetAllLogosResponse> getAll() {
-        return ResponseEntity.ok(getAllLogos.execute());
+    public ResponseEntity<ApiResponse<GetAllLogosResponse>> getAll() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(ApiResponse.success(200, getAllLogos.execute()));
     }
 }

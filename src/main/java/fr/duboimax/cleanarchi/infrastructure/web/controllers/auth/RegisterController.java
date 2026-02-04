@@ -1,6 +1,7 @@
 package fr.duboimax.cleanarchi.infrastructure.web.controllers.auth;
 
 import fr.duboimax.cleanarchi.application.dtos.requests.RegisterUserRequest;
+import fr.duboimax.cleanarchi.application.dtos.responses.ApiResponse;
 import fr.duboimax.cleanarchi.application.dtos.responses.RegisterUserResponse;
 import fr.duboimax.cleanarchi.application.use_cases.auth.CreateUser;
 import org.springframework.http.HttpStatus;
@@ -21,9 +22,10 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<RegisterUserResponse> register(@RequestBody RegisterUserRequest request) {
-        RegisterUserResponse response = createUser.execute(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    public ResponseEntity<ApiResponse<RegisterUserResponse>> register(@RequestBody RegisterUserRequest request) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(ApiResponse.success(201, createUser.execute(request)));
     }
 
 
