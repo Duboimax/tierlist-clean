@@ -5,10 +5,13 @@ import fr.duboimax.cleanarchi.application.dtos.requests.AddCompanyLogoRequest;
 import fr.duboimax.cleanarchi.application.dtos.responses.AddCompanyLogoResponse;
 import fr.duboimax.cleanarchi.application.repositories.CompanyLogoRepository;
 import fr.duboimax.cleanarchi.domain.exception.LogoAlreadyExistsException;
+import fr.duboimax.cleanarchi.domain.exception.MaxLogosReachedException;
 import fr.duboimax.cleanarchi.domain.model.logo.CompanyLogo;
 import fr.duboimax.cleanarchi.domain.model.logo.CompanyName;
 
 public class AddCompanyLogo {
+
+    private static final int MAX_LOGOS = 10;
 
     private final CompanyLogoRepository companyLogoRepository;
     private final LogoUrlBuilder logoUrlBuilder;
@@ -20,6 +23,10 @@ public class AddCompanyLogo {
     }
 
     public AddCompanyLogoResponse execute(AddCompanyLogoRequest request) {
+        if (companyLogoRepository.count() >= MAX_LOGOS) {
+            throw new MaxLogosReachedException();
+        }
+
         CompanyName companyName = new CompanyName(request.companyName());
 
         if (companyLogoRepository.existsByCompanyName(companyName)) {

@@ -41,4 +41,9 @@ public class JpaLogoRepository implements CompanyLogoRepository {
         return springLogoRepository.findById(id.value().toString())
                 .map(LogoMapper::toDomain);
     }
+
+    @Override
+    public long count() {
+        return springLogoRepository.count();
+    }
 }

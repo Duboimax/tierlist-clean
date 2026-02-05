@@ -67,6 +67,13 @@ public class GlobalExceptionHandler {
                 .body(ApiErrorResponse.error(500, "Internal server error"));
     }
 
+    @ExceptionHandler(MaxLogosReachedException.class)
+    public ResponseEntity<ApiErrorResponse> handleMaxLogosReached(MaxLogosReachedException e) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ApiErrorResponse.error(400, e.getMessage()));
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiErrorResponse> handleValidationErrors(MethodArgumentNotValidException e) {
         String message = e.getBindingResult().getFieldErrors().stream()

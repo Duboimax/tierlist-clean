@@ -12,4 +12,5 @@ public interface CompanyLogoRepository {
     boolean existsByCompanyName(CompanyName name);
     List<CompanyLogo> findAll();
     Optional<CompanyLogo> findById(LogoId id);
+    long count();
 }
