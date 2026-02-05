@@ -12,10 +12,7 @@ import fr.duboimax.cleanarchi.application.use_cases.auth.AuthenticateUser;
 import fr.duboimax.cleanarchi.application.use_cases.auth.CreateUser;
 import fr.duboimax.cleanarchi.application.use_cases.logo.AddCompanyLogo;
 import fr.duboimax.cleanarchi.application.use_cases.logo.GetAllLogos;
-import fr.duboimax.cleanarchi.application.use_cases.tierlist.ExportTierList;
-import fr.duboimax.cleanarchi.application.use_cases.tierlist.GetTierList;
-import fr.duboimax.cleanarchi.application.use_cases.tierlist.PlaceLogo;
-import fr.duboimax.cleanarchi.application.use_cases.tierlist.RemoveLogo;
+import fr.duboimax.cleanarchi.application.use_cases.tierlist.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -53,17 +50,17 @@ public class UseCaseConfig {
     }
 
     @Bean
-    public ExportTierList exportTierList(
+    public RemoveLogo removeLogo(TierListRepository tierListRepository) {
+        return new RemoveLogo(tierListRepository);
+    }
+
+    @Bean
+    public ExportAndDownloadTierList exportAndDownloadTierList(
             TierListRepository tierListRepository,
             CompanyLogoRepository companyLogoRepository,
             PdfGenerator pdfGenerator,
             FileStorage fileStorage
     ) {
-        return new ExportTierList(tierListRepository, companyLogoRepository, pdfGenerator, fileStorage);
-    }
-
-    @Bean
-    public RemoveLogo removeLogo(TierListRepository tierListRepository) {
-        return new RemoveLogo(tierListRepository);
+        return new ExportAndDownloadTierList(tierListRepository, companyLogoRepository, pdfGenerator, fileStorage);
     }
 }
