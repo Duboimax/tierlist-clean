@@ -30,7 +30,9 @@ public class LogoSeeder {
                 "netflix.com",
                 "spotify.com",
                 "twitch.tv",
-                "reddit.com"
+                "reddit.com",
+                "uber.com",
+                "apple.com"
         );
 
         for (String domain : companies) {
